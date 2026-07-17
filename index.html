@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奔跑计划 - 轮椅小狗关爱行动</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e8864a;
+            --primary-light: #f5a86a;
+            --primary-dark: #c96a32;
+            --secondary: #8ecae6;
+            --bg-warm: #fef9f3;
+            --bg-cream: #fff8f0;
+            --text-dark: #3d3d3d;
+            --text-light: #777;
+            --white: #ffffff;
+            --card-bg: #ffffff;
+            --border: #f0e6d8;
+            --success: #7cb97a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-warm);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-cream) 0%, #ffe8d6 100%);
+            padding: 100px 24px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(232,134,74,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(142,202,230,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero-text .highlight {
+            color: var(--primary);
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            font-weight: 300;
+        }
+
+        .hero-text p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            margin-bottom: 36px;
+            max-width: 500px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(232,134,74,0.35);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(232,134,74,0.45);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            margin-left: 16px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-box {
+            width: 420px;
+            height: 420px;
+            background: linear-gradient(145deg, var(--primary-light), var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            box-shadow: 0 20px 60px rgba(232,134,74,0.25);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .paw-prints {
+            position: absolute;
+            opacity: 0.08;
+            font-size: 2rem;
+        }
+
+        /* Section common */
+        section {
+            padding: 100px 24px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .section-title .tag {
+            display: inline-block;
+            background: var(--bg-cream);
+            color: var(--primary);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+        }
+
+        .about-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+
+        .about-image {
+            background: var(--bg-cream);
+            border-radius: 24px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            border: 2px dashed var(--border);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 80px 24px;
+        }
+
+        .stats-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            color: var(--white);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background: var(--bg-warm);
+        }
+
+        .upload-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 4px 40px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .form-group label span {
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            background: var(--bg-warm);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            background: var(--white);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--primary-light);
+            border-radius: 16px;
+            padding: 48px 24px;
+            text-align: center;
+            background: var(--bg-cream);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: #fff0e0;
+        }
+
+        .upload-area .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        .upload-area p {
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .upload-area .upload-hint {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .upload-area input[type="file"] {
+            display: none;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .preview-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-item .remove-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 24px;
+            height: 24px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            margin-top: 12px;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .success-message .success-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+
+        .success-message h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .success-message p {
+            color: var(--text-light);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: var(--white);
+        }
+
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 28px;
+        }
+
+        .gallery-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        .gallery-card-image {
+            height: 240px;
+            background: var(--bg-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-card-body {
+            padding: 24px;
+        }
+
+        .gallery-card-body h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .gallery-card-body p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .gallery-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .gallery-card-meta .avatar {
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* How to Help Section */
+        .how-to-help {
+            background: var(--bg-cream);
+        }
+
+        .help-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .help-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px 28px;
+            text-align: center;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+            transition: transform 0.3s;
+        }
+
+        .help-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .help-card-icon {
+            width: 72px;
+            height: 72px;
+            background: var(--bg-cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+
+        .help-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .help-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: #aaa;
+            padding: 60px 24px 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            padding-top: 24px;
+            border-top: 1px solid #444;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.4rem;
+            }
+
+            .hero-text p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-image-box {
+                width: 280px;
+                height: 280px;
+                font-size: 5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .help-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .upload-container {
+                padding: 28px;
+            }
+
+            .section-title h2 {
+                font-size: 1.7rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+
+            .stat-number {
+                font-size: 2.2rem;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 12px;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">🐾</div>
+                <span>奔跑计划</span>
+            </div>
+            <ul class="nav-links">
+                <li><a onclick="scrollToSection('home')" class="active">首页</a></li>
+                <li><a onclick="scrollToSection('about')">关于项目</a></li>
+                <li><a onclick="scrollToSection('gallery')">小狗故事</a></li>
+                <li><a onclick="scrollToSection('upload')">上传照片</a></li>
+                <li><a onclick="scrollToSection('help')">参与方式</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>奔跑计划<br><span class="highlight">让每只小狗都能自由奔跑</span></h1>
+                <p class="subtitle"> wheelchair dog rescue project</p>
+                <p>我们致力于为因疾病、意外而失去行走能力的轮椅小狗提供轮椅辅具、康复支持和爱心领养，帮助它们重新感受奔跑的快乐。</p>
+                <div>
+                    <a class="btn btn-primary" onclick="scrollToSection('upload')">🐕 上传小狗照片</a>
+                    <a class="btn btn-secondary" onclick="scrollToSection('about')">了解更多</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-box">🐕‍🦺</div>
+            </div>
+        </div>
+        <span class="paw-prints" style="top:20%;left:10%">🐾</span>
+        <span class="paw-prints" style="top:60%;right:15%">🐾</span>
+        <span class="paw-prints" style="bottom:25%;left:20%">🐾</span>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">156</div>
+                <div class="stat-label">已帮助轮椅小狗</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">32</div>
+                <div class="stat-label">覆盖城市</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">89</div>
+                <div class="stat-label">成功领养</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">爱心志愿者</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-title">
+            <span class="tag">关于项目</span>
+            <h2>为什么选择帮助轮椅小狗？</h2>
+            <p>每一只小狗都值得被温柔以待</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-text">
+                <h3>它们只是换了一种方式奔跑</h3>
+                <p>在中国，每年有数千只小狗因车祸、疾病或先天缺陷而失去行走能力。它们中的大多数面临着被遗弃、安乐死的命运。</p>
+                <p>「奔跑计划」成立于2023年，我们相信：只要给予适当的辅助器具和康复支持，轮椅小狗同样可以拥有快乐、有尊严的生活。</p>
+                <p>项目通过为流浪或贫困家庭的轮椅小狗<strong>免费配发定制轮椅</strong>、提供<strong>康复训练指导</strong>、对接<strong>爱心领养家庭</strong>，让每一只小狗都有机会重新"奔跑"。</p>
+            </div>
+            <div class="about-image">🦮</div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="section-title">
+            <span class="tag">小狗故事墙</span>
+            <h2>它们的微笑是最好的回报</h2>
+            <p>来自救助人和领养家庭的温暖分享</p>
+        </div>
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Card 1 -->
+            <div class="gallery-card">
+                <div class="gallery-card-image">🐶</div>
+                <div class="gallery-card-body">
+                    <h4>小花 - 北京</h4>
+                    <p>因为车祸失去了后腿，但在装上轮椅后，它成了小区里跑得最快的小狗！现在它和一位退休老师生活在一起，每天最幸福的事情就是在公园里"飞奔"。</p>
+                    <div class="gallery-card-meta">
+                        <div class="avatar">李</div>
+                        <span>救助人：李女士</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="gallery-card">
+                <div class="gallery-card-image">🐕</div>
+                <div class="gallery-card-body">
+                    <h4>豆豆 - 上海</h4>
+                    <p>先天脊柱发育不全，但性格超级开朗。装上轮椅的第一天就学会了"漂移"转弯，现在是我们社区的明星狗狗，每次出门都会收获一堆粉丝！</p>
+                    <div class="gallery-card-meta">
+                        <div class="avatar">王</div>
+                        <span>救助人：王先生</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="gallery-card">
+                <div class="gallery-card-image">🦮</div>
+                <div class="gallery-card-body">
+                    <h4>铁柱 - 成都</h4>
+                    <p>被遗弃在工厂门口的德牧串串，后腿瘫痪但没有放弃生的希望。经过康复训练和轮椅辅助，现在它已经可以跟着主人爬山了！</p>
+                    <div class="gallery-card-meta">
+                        <div class="avatar">张</div>
+                        <span>领养人：张女士</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="gallery-card">
+                <div class="gallery-card-image">🐩</div>
+                <div class="gallery-card-body">
+                    <h4>棉花糖 - 广州</h4>
+                    <p>因为神经炎导致后肢无力，主人一度想要放弃。通过奔跑计划获得轮椅和康复方案后，棉花糖现在每天都能自己遛弯，恢复了往日的活泼！</p>
+                    <div class="gallery-card-meta">
+                        <div class="avatar">陈</div>
+                        <span>救助人：陈医生</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="gallery-card">
+                <div class="gallery-card-image">🐕‍🦺</div>
+                <div class="gallery-card-body">
+                    <h4>黑宝 - 杭州</h4>
+                    <p>从狗肉车上救下来的田园犬，脊椎受伤但意志顽强。装上轮椅后第一次奔跑的视频感动了无数网友，现在已经找到了永远的家。</p>
+                    <div class="gallery-card-meta">
+                        <div class="avatar">刘</div>
+                        <span>领养人：刘先生</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="gallery-card">
+                <div class="gallery-card-image">🐾</div>
+                <div class="gallery-card-body">
+                    <h4>等你分享</h4>
+                    <p>你的轮椅小狗也有温暖的故事吗？点击上方"上传小狗照片"按钮，把它的笑容分享给更多人，让爱与希望传递下去！</p>
+                    <div class="gallery-card-meta">
+                        <div class="avatar" style="background:var(--success)">+</div>
+                        <span>期待你的故事</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section class="upload-section" id="upload">
+        <div class="section-title">
+            <span class="tag">照片上传</span>
+            <h2>分享你家轮椅小狗的故事</h2>
+            <p>每一张照片都是一份温暖，每一个故事都能鼓励更多人</p>
+        </div>
+        <div class="upload-container">
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label>小狗名字 <span>*</span></label>
+                    <input type="text" id="dogName" placeholder="请输入小狗的名字" required>
+                </div>
+                <div class="form-group">
+                    <label>所在城市 <span>*</span></label>
+                    <input type="text" id="city" placeholder="例如：北京、上海" required>
+                </div>
+                <div class="form-group">
+                    <label>救助人/领养人姓名 <span>*</span></label>
+                    <input type="text" id="rescuerName" placeholder="您的称呼" required>
+                </div>
+                <div class="form-group">
+                    <label>联系电话（选填）</label>
+                    <input type="tel" id="phone" placeholder="方便我们后续联系">
+                </div>
+                <div class="form-group">
+                    <label>小狗的故事 <span>*</span></label>
+                    <textarea id="story" placeholder="分享小狗的遭遇、康复过程、现在的快乐生活..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>上传照片 <span>*</span></label>
+                    <div class="upload-area" onclick="document.getElementById('photoInput').click()">
+                        <div class="upload-icon">📷</div>
+                        <p>点击或拖拽照片到此处上传</p>
+                        <p class="upload-hint">支持 JPG、PNG 格式，最多上传 6 张照片</p>
+                    </div>
+                    <input type="file" id="photoInput" accept="image/*" multiple onchange="handleFileSelect(event)">
+                    <div class="preview-grid" id="previewGrid"></div>
+                </div>
+                <button type="submit" class="btn btn-primary submit-btn">💝 提交分享</button>
+            </form>
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">🎉</div>
+                <h3>提交成功！</h3>
+                <p>感谢您分享小狗的温暖故事，我们会在审核后展示在故事墙上。</p>
+                <button class="btn btn-primary" onclick="resetForm()" style="margin-top:24px">继续分享</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Help Section -->
+    <section class="how-to-help" id="help">
+        <div class="section-title">
+            <span class="tag">参与方式</span>
+            <h2>你也可以成为守护天使</h2>
+            <p>无论哪种方式，你的爱都会让小狗们的生活更美好</p>
+        </div>
+        <div class="help-grid">
+            <div class="help-card">
+                <div class="help-card-icon">📸</div>
+                <h4>分享故事</h4>
+                <p>如果你是轮椅小狗的救助人或领养人，上传照片和故事，让更多人了解它们坚强可爱的一面。</p>
+            </div>
+            <div class="help-card">
+                <div class="help-card-icon">🤝</div>
+                <h4>成为志愿者</h4>
+                <p>参与线下救助活动、协助轮椅配发、帮助推广宣传，用时间和爱心陪伴这些特别的小生命。</p>
+            </div>
+            <div class="help-card">
+                <div class="help-card-icon">❤️</div>
+                <h4>爱心捐赠</h4>
+                <p>捐赠轮椅辅具、康复器材或直接资金支持，帮助更多需要帮助的轮椅小狗获得新生。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo-icon" style="width:32px;height:32px;font-size:1rem;">🐾</div>
+                <span>奔跑计划</span>
+            </div>
+            <div class="footer-links">
+                <a onclick="scrollToSection('about')">关于项目</a>
+                <a onclick="scrollToSection('gallery')">小狗故事</a>
+                <a onclick="scrollToSection('upload')">上传照片</a>
+                <a onclick="scrollToSection('help')">参与方式</a>
+            </div>
+            <div class="copyright">
+                <p> 奔跑计划 Wheelchair Dog Rescue Project</p>
+                <p style="margin-top:8px;font-size:0.8rem">让每一只小狗都能自由奔跑 🐕‍🦺</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '64px';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.background = 'white';
+            navLinks.style.padding = '20px';
+            navLinks.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+        }
+
+        // Active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = ['home', 'about', 'gallery', 'upload', 'help'];
+            const navLinks = document.querySelectorAll('.nav-links a');
+            let current = '';
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (element && window.scrollY >= element.offsetTop - 200) {
+                    current = section;
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // File upload preview
+        let selectedFiles = [];
+
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files);
+            if (selectedFiles.length + files.length > 6) {
+                alert('最多只能上传6张照片哦');
+                return;
+            }
+            selectedFiles = [...selectedFiles, ...files];
+            updatePreview();
+        }
+
+        function updatePreview() {
+            const grid = document.getElementById('previewGrid');
+            grid.innerHTML = '';
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const div = document.createElement('div');
+                    div.className = 'preview-item';
+                    div.innerHTML = `
+                        <img src="${e.target.result}" alt="preview">
+                        <button type="button" class="remove-btn" onclick="removeFile(${index})">×</button>
+                    `;
+                    grid.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            updatePreview();
+        }
+
+        // Form submission
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (selectedFiles.length === 0) {
+                alert('请至少上传一张照片');
+                return;
+            }
+
+            // Simulate upload
+            const btn = this.querySelector('.submit-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ 提交中...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                document.getElementById('uploadForm').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 1500);
+        });
+
+        function resetForm() {
+            document.getElementById('uploadForm').reset();
+            selectedFiles = [];
+            updatePreview();
+            document.getElementById('uploadForm').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // Drag and drop for upload area
+        const uploadArea = document.querySelector('.upload-area');
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, () => {
+                uploadArea.style.borderColor = 'var(--primary)';
+                uploadArea.style.background = '#fff0e0';
+            });
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, () => {
+                uploadArea.style.borderColor = 'var(--primary-light)';
+                uploadArea.style.background = 'var(--bg-cream)';
+            });
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+            if (selectedFiles.length + files.length > 6) {
+                alert('最多只能上传6张照片哦');
+                return;
+            }
+            selectedFiles = [...selectedFiles, ...files];
+            updatePreview();
+        });
+    </script>
+</body>
+</html>
